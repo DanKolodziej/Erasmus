@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Internal Coordinator Panel</h1>
+{% endblock %}
+
+{% block body %}
+
+    <div class = "panel-body">
+        <div class = "panel panel-info courses table-responsive">
+            <div class = "panel-heading">
+                <h2>To Do - Students from your faculty</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Code</th>
+                        <th>Course Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesByUserRoleFaculty %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ studentsByFaculty[loop.index-1].name }}</td>
+                            <td>{{ studentsByFaculty[loop.index-1].surname }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td>{{ studentCoursesStatesByFaculty[loop.index-1] }}</td>
+                            {% if coursesTransitionsByFaculty is defined %}
+                                {% set studentId = studentsIdsByFaculty[loop.index-1] %}
+                                {% for toState in coursesTransitionsByFaculty[course.name] %}
+                                    <td><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
+                                {% endfor %}
+                            {% endif %}
+                            <td><a href="{{ path('studentCourseList', {'studentId': studentsIdsByFaculty[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class = "panel-body">
+        <div class = "panel panel-info courses table-responsive">
+            <div class = "panel-heading">
+                <h2>To Do - Students from other faculties</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Student Faculty</th>
+                        <th>Code</th>
+                        <th>Course Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>State</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesByFaculty %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ studentsByCourseFaculty[loop.index-1].name }}</td>
+                            <td>{{ studentsByCourseFaculty[loop.index-1].surname }}</td>
+                            <td>{{ studentsByCourseFaculty[loop.index-1].faculty.shortName }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td>{{ studentCoursesStatesByCourseFaculty[loop.index-1] }}</td>
+                            {% if coursesTransitionsByCourseFaculty is defined %}
+                                {% set studentId = studentsIdsByCourseFaculty[loop.index-1] %}
+                                {% for toState in coursesTransitionsByCourseFaculty[course.name] %}
+                                    <td><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
+                                {% endfor %}
+                            {% endif %}
+                            <td><a href="{{ path('studentCourseList', {'studentId': studentsIdsByCourseFaculty[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

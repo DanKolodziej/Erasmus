@@ -1,0 +1,15 @@
+<div class="btn-toolbar" role="toolbar">
+    <div class="btn-group" role="group">
+        {% for faculty in faculties %}
+
+            <button type="button" class="btn btn-danger facultyButton" id = "{{ faculty.shortName }}FacultyButton" data-toggle = "tooltip" data-trigger="hover" title = "{{ faculty.name }}">{{ faculty.shortName }}</button>
+
+        {% endfor %}
+    </div>
+</div>
+
+{% for faculty in faculties %}
+    <div id="W{{ loop.index }}" class="faculty">
+        {{ render(controller('AppBundle:Course:availableCoursesFaculty', { 'studentId':studentId, 'facultyId':loop.index })) }}
+    </div>
+{% endfor %}

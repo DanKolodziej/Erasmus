@@ -1,0 +1,156 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">{{ studentName }} {{ studentSurname }} Courses States</h1>
+{% endblock %}
+
+{% block body %}
+
+    <div class = "panel panel-info courses table-responsive">
+        <div class = "panel-heading">
+            <h2>{{ studentName }} {{ studentSurname }} courses</h2>
+        </div>
+        <div class = "panel-body">
+            <table class="table table-condensed">
+                <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Form</th>
+                    <th>ECTS</th>
+                    <th>Level</th>
+                    <th>Type</th>
+                    <th>Syllabus</th>
+                    <th>State</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for course in courses %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ course.code }}</td>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.form }}</td>
+                        <td>{{ course.ects }}</td>
+                        <td>{{ course.level }}</td>
+                        <td>{{ course.type }}</td>
+                        {% if course.syllabus is not null %}
+                            <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                        {% else %}
+                            <td>-</td>
+                        {% endif %}
+                        <td><button type="button" class="btn btn-default courseStudentStateHistoryButton" id="{{ course.id }}courseStudentStateHistoryButton{{ studentId }}" data-toggle="modal" data-target="#courseStudent{{ course.id }}{{ studentId }}History">{{ studentCoursesStates[loop.index-1] }}</button></td>
+                        {% if coursesTransitions is defined %}
+                            {% for toState in coursesTransitions[course.name] %}
+                                <td><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
+                            {% endfor %}
+                        {% endif %}
+                        <td></td>
+                    </tr>
+
+                    <div class="modal fade" id="courseStudent{{ course.id }}{{ studentId }}History" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">History of states of course: {{ course.name }} - {{ course.code }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body courseStudentStateHistory" id="courseStudent{{ course.id }}{{ studentId }}StateHistory">
+
+                                </div>
+                                <div class="modal-footer">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+    var courseStudentStateHistoryButtons = document.getElementsByClassName("courseStudentStateHistoryButton");
+
+    for (var i = 0; i < courseStudentStateHistoryButtons.length; i++) {
+    courseStudentStateHistoryButtons[i].addEventListener("click", function(){
+
+    var courseStudentStateHistoryButtonId = this.id;
+
+    var ourRequest = new XMLHttpRequest();
+    var url = "{{ url('courseStudentStateHistory', {'courseId': 'courseId', 'studentId': 'studentId'}) }}";
+    var courseId = parseInt(courseStudentStateHistoryButtonId);
+    var studentId = courseStudentStateHistoryButtonId.split(/[^0-9]+/g)[1];
+    url = url.replace("courseId", courseId);
+    url = url.replace("studentId", studentId);
+
+    var courseStudentStateHistory = document.getElementById("courseStudent" + courseId + studentId + "StateHistory");
+    ourRequest.open('GET', url, true);
+    ourRequest.onload = function(){
+
+    console.log(ourRequest.responseText);
+    var courseStudentStates = JSON.parse(ourRequest.responseText);
+    renderCourseStudentStateHistory(courseStudentStates, courseStudentStateHistory);
+    };
+
+    ourRequest.send();
+    });
+    }
+
+    function renderCourseStudentStateHistory(courseStudentStates, courseStudentStateHistory) {
+
+        console.log(courseStudentStates);
+
+        var htmlCourseStudentStateHistory = "<div class=\"row bg-info\">\n" +
+            "                                                <div class=\"col-md-4\">\n" +
+            "                                                    <p>State</p>\n" +
+            "                                                </div>\n" +
+            "                                                <div class=\"col-md-4\">\n" +
+            "                                                    <p>Date</p>\n" +
+            "                                                </div>\n" +
+            "                                                <div class=\"col-md-4\">\n" +
+            "                                                    <p>Who changed state</p>\n" +
+            "                                                </div>\n" +
+            "                                            </div>";
+
+        courseStudentStateHistory.innerHTML = htmlCourseStudentStateHistory;
+        for (var i = 0; i < courseStudentStates.length; i += 3) {
+
+            var htmlCurrentCourseStudentStateName = "<div class=\"row bg-success\">\n" +
+                "                                                <div class=\"col-md-4\">\n" +
+                "                                                    <p>";
+
+            htmlCurrentCourseStudentStateName += courseStudentStates[i + 1].name;
+            htmlCurrentCourseStudentStateName += "</p>\n" +
+                "                                                </div>";
+
+            var htmlCurrentCourseStudentStateDate = "<div class=\"col-md-4\">\n" +
+                "                                                    <p>";
+
+            htmlCurrentCourseStudentStateDate += courseStudentStates[i].date.date.split(".")[0];
+            htmlCurrentCourseStudentStateDate += "</p>\n" +
+                "                                                </div>";
+
+            var htmlCurrentCourseStudentStatePerson = "<div class=\"col-md-4\">\n" +
+                "                                                    <p>";
+
+            htmlCurrentCourseStudentStatePerson += courseStudentStates[i + 2].name + " " + courseStudentStates[i + 2].surname;
+            htmlCurrentCourseStudentStatePerson += "</p>\n" +
+                "                                                </div>" +
+                "                                            </div>";
+
+            courseStudentStateHistory.innerHTML += htmlCurrentCourseStudentStateName +
+                htmlCurrentCourseStudentStateDate + htmlCurrentCourseStudentStatePerson;
+        }
+    }
+
+    </script>
+{% endblock %}

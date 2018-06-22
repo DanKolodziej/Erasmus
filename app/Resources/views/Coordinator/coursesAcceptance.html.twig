@@ -1,0 +1,48 @@
+{% extends "Basic/list.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Courses Acceptance</h1>
+{% endblock %}
+
+{% block listName %}
+    <h2 class="header">{{ student.name }} {{ student.surname }} - Courses Acceptance List</h2>
+{% endblock %}
+
+{% block tableHeader %}
+
+    <tr>
+        <th>No.</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Form</th>
+        <th>ECTS</th>
+        <th>Level</th>
+        <th>Type</th>
+        <th>Syllabus</th>
+    </tr>
+
+{% endblock %}
+
+{% block tableBody %}
+
+    {% for course in courses %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ course.code }}</td>
+            <td>{{ course.name }}</td>
+            <td>{{ course.form }}</td>
+            <td>{{ course.eCTS }}</td>
+            <td>{{ course.level }}</td>
+            <td>{{ course.type }}</td>
+            {% if course.syllabus is not null %}
+                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+            {% else %}
+                <td>-</td>
+            {% endif %}
+
+            <td><a href="{{ path('courseEnrollmentDecision', {'courseId': course.id, 'studentId':student.id, 'decision':'accept'}) }}"><button type="button" class="btn btn-success">Accept</button></a></td>
+            <td><a href="{{ path('courseEnrollmentDecision', {'courseId': course.id, 'studentId':student.id, 'decision':'decline'}) }}"><button type="button" class="btn btn-warning">Decline</button></a></td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

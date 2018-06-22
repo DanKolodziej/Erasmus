@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "header">Edit course</h1>
+{% endblock %}
+
+{% block body %}
+
+    <div class = "table-wrap">
+    <a href="{{ path('coursesList') }}"><button type="button" class="btn btn-success addBtn">Go back to list of courses</button></a>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    </div>
+
+{% endblock %}

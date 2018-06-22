@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    {% block addOrEditForm %}
+
+    {% endblock %}
+
+    {% for flash_message in app.session.flashBag.get('error') %}
+        <div class="flash-notice">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
+    <div class = "panel panel-info courses table-responsive">
+        <div class = "panel-body">
+            <table class="table table-condensed">
+                {% block listName %}
+
+                {% endblock %}
+                <thead>
+                {% block tableHeader %}
+
+                {% endblock %}
+                </thead>
+                <tbody>
+                {% block tableBody %}
+
+                {% endblock %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

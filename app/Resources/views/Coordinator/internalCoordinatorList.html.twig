@@ -1,0 +1,66 @@
+{% extends "Basic/list.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Internal Coordinators</h1>
+{% endblock %}
+
+{% block addOrEditForm %}
+    {% form_theme form _self %}
+
+    <div class = "table-wrap">
+
+        {#<a href="{{ path('admin') }}"><button type="button" class="btn btn-primary Back-Button">Back</button></a>#}
+
+        <h2 class="header">{{ formTitle }}</h2>
+        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {% block form_errors %}
+        {% spaceless %}
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li class="error-message">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endspaceless %}
+    {% endblock form_errors %}
+{% endblock %}
+
+{% block listName %}
+    <h2 class="header">Internal Coordinators List</h2>
+{% endblock %}
+
+{% block tableHeader %}
+
+    <tr>
+        <th>No.</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Faculty</th>
+    </tr>
+
+{% endblock %}
+
+{% block tableBody %}
+
+    {% for internalCoordinator in internalCoordinators %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ internalCoordinator.username }}</td>
+            <td>{{ internalCoordinator.name }}</td>
+            <td>{{ internalCoordinator.surname }}</td>
+            <td>{{ facultyShortNames[loop.index-1] }}</td>
+
+            <td><a href="{{ path('editInternalCoordinator', {'id': internalCoordinator.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+            <td><a href="{{ path('deleteInternalCoordinator', {'id': internalCoordinator.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

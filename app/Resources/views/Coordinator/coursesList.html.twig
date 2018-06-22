@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+        <h1 class = "page-header">List of Courses</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="Coordinator-panel">
+    <div class="Back-Button">
+        <a href="{{ path('EnrolledStudentsSummary') }}"><button type="button" class="btn btn-default addBtn">Download Enrollments Summary</button></a>
+        <a href="{{ path('addCourses') }}"><button type="button" class="btn btn-primary">Add new courses</button></a>
+    </div>
+    <div class = "btn-toolbar">
+        <td><button type="button" id = "previousButton" class="btn btn-success active">Semester {{ semesters[0].season }} {{ semesters[0].year }}</button></td>
+        <td><button type="button" id = "currentButton" class="btn btn-success active">Semester {{ semesters[1].season }} {{ semesters[1].year }}</button></td>
+        <td><button type="button" id = "nextButton" class="btn btn-success active">Semester {{ semesters[2].season }} {{ semesters[2].year }}</button></td>
+        <td><button type="button" id = "otherButton" class="btn btn-success active">Semester {{ semesters[3].season }} {{ semesters[3].year }}</button></td>
+    </div>
+
+    <div class = "table-wrap">
+
+        <div class = "semester" id = "previous">
+            {{ render(controller('AppBundle:Course:semesterCourses', { 'semesterId':1 })) }}
+        </div>
+
+        <div class = "semester" id = "current">
+            {{ render(controller('AppBundle:Course:semesterCourses', { 'semesterId':2 })) }}
+        </div>
+
+        <div class = "semester" id = "next">
+            {{ render(controller('AppBundle:Course:semesterCourses', { 'semesterId':3 })) }}
+        </div>
+
+        <div class = "semester" id = "other">
+            {{ render(controller('AppBundle:Course:semesterCourses', { 'semesterId':4 })) }}
+        </div>
+
+    </div>
+    </div>
+{% endblock %}

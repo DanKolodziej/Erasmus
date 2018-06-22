@@ -1,0 +1,64 @@
+{% extends "Basic/list.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Deans Office Workers</h1>
+{% endblock %}
+
+{% block addOrEditForm %}
+    {% form_theme form _self %}
+
+    <div class = "table-wrap">
+
+        {#<a href="{{ path('internalCoordinator') }}"><button type="button" class="btn btn-primary Back-Button">Back</button></a>#}
+
+        <h2 class="header">{{ formTitle }}</h2>
+        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {% block form_errors %}
+        {% spaceless %}
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li class="error-message">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endspaceless %}
+    {% endblock form_errors %}
+{% endblock %}
+
+{% block listName %}
+    <h2 class="header">Deans Office Worker List</h2>
+{% endblock %}
+
+{% block tableHeader %}
+
+    <tr>
+        <th>No.</th>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Surname</th>
+    </tr>
+
+{% endblock %}
+
+{% block tableBody %}
+
+    {% for deansOffice in deansOffices %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ deansOffice.username }}</td>
+            <td>{{ deansOffice.name }}</td>
+            <td>{{ deansOffice.surname }}</td>
+
+            <td><a href="{{ path('editDeansOffice', {'id': deansOffice.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+            <td><a href="{{ path('deleteDeansOffice', {'id': deansOffice.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

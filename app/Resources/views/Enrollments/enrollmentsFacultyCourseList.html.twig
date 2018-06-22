@@ -1,0 +1,182 @@
+<div class = "panel panel-info courses table-responsive">
+    <div class = "panel-heading">
+        <h2>{{ facultyShortName }} - {{ facultyName }}</h2>
+    </div>
+    <div class = "btn-toolbar">
+        <td><button type="button" id = "previousButton{{ facultyShortName }}" class="previousButton btn btn-success active">Semester {{ previousSemester.season }} {{ previousSemester.year }}</button></td>
+        <td><button type="button" id = "currentButton{{ facultyShortName }}" class="currentButton btn btn-success active">Semester {{ currentSemester.season }} {{ currentSemester.year }}</button></td>
+        <td><button type="button" id = "nextButton{{ facultyShortName }}" class="nextButton btn btn-success active">Semester {{ nextSemester.season }} {{ nextSemester.year }}</button></td>
+        <td><button type="button" id = "otherButton{{ facultyShortName }}" class="otherButton btn btn-success active">Semester {{ otherSemester.season }} {{ otherSemester.year }}</button></td>
+    </div>
+    <div class = "panel-body">
+
+        <div class = "panel panel-info courses table-responsive" id = "previous{{ facultyShortName }}">
+            <div class = "panel-heading">
+                <h2>Semester {{ previousSemester.season }} {{ previousSemester.year }}</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>Enroll</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesPrevious %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td><input type="checkbox" name="course{{ loop.index }}" value="{{ course.code }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class = "panel panel-info courses table-responsive" id = "current{{ facultyShortName }}">
+            <div class = "panel-heading">
+                <h2>Semester {{ currentSemester.season }} {{ currentSemester.year }}</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>Enroll</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesCurrent %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td><input type="checkbox" name="course{{ loop.index }}" value="{{ course.code }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class = "panel panel-info courses table-responsive" id = "next{{ facultyShortName }}">
+            <div class = "panel-heading">
+                <h2>Semester {{ nextSemester.season }} {{ nextSemester.year }}</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>Enroll</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesNext %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td><input type="checkbox" name="course{{ loop.index }}" value="{{ course.code }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class = "panel panel-info courses table-responsive" id = "other{{ facultyShortName }}">
+            <div class = "panel-heading">
+                <h2>Semester {{ otherSemester.season }} {{ otherSemester.year }}</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                        <th>Enroll</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for course in coursesOther %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ course.code }}</td>
+                            <td>{{ course.name }}</td>
+                            <td>{{ course.form }}</td>
+                            <td>{{ course.eCTS }}</td>
+                            <td>{{ course.level }}</td>
+                            <td>{{ course.type }}</td>
+                            {% if course.syllabus is not null %}
+                                <td><a href= "{{ asset('uploads/syllabuses/' ~ course.syllabus) }}">syllabus</a></td>
+                            {% else %}
+                                <td>-</td>
+                            {% endif %}
+                            <td><input type="checkbox" name="course{{ loop.index }}" value="{{ course.code }}"></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

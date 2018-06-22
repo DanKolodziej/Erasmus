@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Erasmus+{% endblock %}</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/mainStyle.css') }}" />
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    {% block header %}{% endblock %}
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><p class="navbar-text"><a href="{{ path('homepage') }}" class="navbar-link">Home</a></p></li>
+                        <li><p class="navbar-text"><a href="{{ path('enrollments') }}" class="navbar-link">Enrollments</a></p></li>
+                        {% if app.session.get('role') == 'Administrator' %}
+                            {% include 'Administrator/adminNavbar.html.twig' %}
+                        {% elseif app.session.get('role') == 'Internal Coordinator' %}
+                            {% include 'Coordinator/internalCoordinatorNavbar.html.twig' %}
+                        {% elseif app.session.get('role') == 'External Coordinator' %}
+                            {% include 'Coordinator/externalCoordinatorNavbar.html.twig' %}
+                        {% elseif app.session.get('role') == 'Deans Office' %}
+                            {% include 'DeansOffice/deansOfficeNavbar.html.twig' %}
+                        {% elseif app.session.get('role') == 'Student' %}
+                            {% include 'Student/studentNavbar.html.twig' %}
+                        {% elseif app.session.get('role') == 'DWM' %}
+                            {% include 'DWM/dwmNavbar.html.twig' %}
+                        {% endif %}
+                    </ul>
+                    <img src="{{ asset('images/pwrLogo.png') }}"/>
+                    <div class="navbar-collapse collapse navbar-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <p class="navbar-text">
+                                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                                <a href="{{ path('fos_user_security_logout') }}" class="navbar-link">
+                                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                                </a>
+                            </p>
+                            <h3>{{ app.session.get('role') }}</h3>
+                        {% else %}
+                            <ul class="nav navbar-nav">
+                                <li><p class="navbar-text">
+                                        <a href="{{ path('fos_user_security_login') }}" class="navbar-link">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                                    </p></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </nav>
+            {% block body %}{% endblock %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <!-- Latest compiled and minified JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+            <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+            <script type="text/javascript" src="{{ asset('js/mainScript.js') }}"></script>
+            {% block javascripts %}{% endblock %}
+        </div>
+    </body>
+</html>

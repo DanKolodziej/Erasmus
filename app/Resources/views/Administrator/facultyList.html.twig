@@ -1,0 +1,84 @@
+{% extends "Basic/list.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Faculties</h1>
+{% endblock %}
+
+{% block addOrEditForm %}
+    {% form_theme form _self %}
+
+    <div class = "table-wrap">
+
+        {#<a href="{{ path('admin') }}"><button type="button" class="btn btn-primary Back-Button">Back</button></a>#}
+
+        <h2 class="header">{{ formTitle }}</h2>
+        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {% block form_errors %}
+        {% spaceless %}
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li class="error-message">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endspaceless %}
+    {% endblock form_errors %}
+{% endblock %}
+
+{% block listName %}
+    <h2 class="header">Faculty List</h2>
+{% endblock %}
+
+{% block tableHeader %}
+
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Short Name</th>
+        <th>Upper Faculty</th>
+    </tr>
+
+{% endblock %}
+
+{% block tableBody %}
+
+    {% for faculty in faculties %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ faculty.name }}</td>
+            <td>{{ faculty.shortName }}</td>
+            <td>{{ faculty.upperFaculty }}</td>
+
+            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#faculty{{ faculty.id }}DeleteAlert">Delete</button></td>
+            <td><a href="{{ path('editFaculty', {'id': faculty.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+
+            <div class="modal fade" id="faculty{{ faculty.id }}DeleteAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Faculty deletion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this faculty?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('deleteFaculty', {'id': faculty.id}) }}"><button type="button" class="btn btn-primary">Yes</button></a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+    {% endfor %}
+
+{% endblock %}

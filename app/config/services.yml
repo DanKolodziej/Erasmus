@@ -1,0 +1,67 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+#    service_name:
+#        class: AppBundle\Directory\ClassName
+#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+
+    new_erasmus_user:
+        class: AppBundle\Form\UserType
+        tags:
+            - { name: form.type, alias: new_erasmus_user }
+
+    new_erasmus_dwm_user:
+        class: AppBundle\Form\DWMType
+        tags:
+            - { name: form.type, alias: new_erasmus_dwm_user }
+
+    course_service:
+        class: AppBundle\Service\CourseService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    user_service:
+        class: AppBundle\Service\UserService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    faculty_service:
+        class: AppBundle\Service\FacultyService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    university_service:
+        class: AppBundle\Service\UniversityService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    country_service:
+        class: AppBundle\Service\CountryService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    student_service:
+        class: AppBundle\Service\StudentService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    internal_coordinator_service:
+        class: AppBundle\Service\InternalCoordinatorService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    external_coordinator_service:
+        class: AppBundle\Service\ExternalCoordinatorService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    dwm_service:
+        class: AppBundle\Service\DWMService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    deans_office_service:
+        class: AppBundle\Service\DeansOfficeService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    deans_office_syllabus_service:
+        class: AppBundle\Service\DeansOfficeSyllabusService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]
+
+    semester_service:
+        class: AppBundle\Service\SemesterService
+        arguments: ["@doctrine.orm.entity_manager", "@service_container", "@logger"]

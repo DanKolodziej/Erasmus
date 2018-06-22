@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Assign Student Index</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% form_theme form _self %}
+
+    <div class = "table-wrap">
+
+        {#<a href="{{ path('studentList') }}"><button type="button" class="btn btn-success addBtn">Go back to list of Students</button></a>#}
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {% block form_errors %}
+        {% spaceless %}
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li class="error-message">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endspaceless %}
+    {% endblock form_errors %}
+
+{% endblock %}

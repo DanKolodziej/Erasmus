@@ -1,0 +1,39 @@
+{% extends "Basic/list.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Students</h1>
+{% endblock %}
+
+{% block listName %}
+    <h2 class="header">Student List</h2>
+{% endblock %}
+
+{% block tableHeader %}
+
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Index Number</th>
+    </tr>
+
+{% endblock %}
+
+{% block tableBody %}
+
+    {% for student in students %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ student.name }}</td>
+            <td>{{ student.surname }}</td>
+            <td>{{ indexes[loop.index-1] }}</td>
+        {% if app.session.get('role') == 'DWM' %}
+            <td><a href="{{ path('assignStudentIndex', {'studentId': studentArr[loop.index-1].id}) }}"><button type="button" class="btn btn-info">Assign Student Index</button></a></td>
+        {% endif %}
+        {% if app.session.get('role') == 'External Coordinator' or app.session.get('role') == 'DWM' %}
+            <td><a href="{{ path('studentEnrollmentsState', {'studentId': studentArr[loop.index-1].id}) }}"><button type="button" class="btn btn-info">Students Enrolled Courses Acceptance</button></a></td>
+        {% endif %}
+        </tr>
+    {% endfor %}
+
+{% endblock %}

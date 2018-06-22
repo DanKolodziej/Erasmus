@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Add course</h1>
+{% endblock %}
+
+{% block body %}
+
+    {% form_theme form _self %}
+
+    <div class = "table-wrap">
+
+        {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+
+    </div>
+
+    {% block form_errors %}
+        {% spaceless %}
+            {% if errors is defined and errors|length > 0 %}
+                <ul class="error-list">
+                    {% for error in errors %}
+                        <li class="error-message">{{ error.message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endspaceless %}
+    {% endblock form_errors %}
+
+{% endblock %}

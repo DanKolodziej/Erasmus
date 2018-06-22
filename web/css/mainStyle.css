@@ -1,0 +1,232 @@
+body {
+    background-color: lavender;
+}
+
+.error-list {
+    list-style-type: none;
+}
+
+.btn-toolbar {
+    margin: auto;
+    width: 105ch;
+}
+
+.navbar {
+    box-shadow: 2px 2px 2px lightgrey;
+    background-color: white;
+    border-color: white;
+}
+
+.jumbotron {
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.custom-button {
+    background-color: #F8F8F8;
+    box-shadow: 2px 2px 2px lightgrey;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-header {
+    background-color: rgb(217, 237, 247);
+    text-align: center;
+    margin-top: 0;
+    padding-left: 5px;
+    border-radius: 5px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    box-shadow: 2px 2px 2px lightgrey;
+}
+
+.custom-form {
+    background-color: #F8F8F8;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.flash-notice {
+    color: red;
+    font-weight: bold;
+}
+
+.form-group, #fos_user_registration_form div {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    overflow: auto;
+}
+
+.checkbox label {
+    padding: 0px;
+}
+
+.form-group label, #fos_user_registration_form div label {
+    float: left;
+}
+
+.form-group input, #fos_user_registration_form div input {
+    float: right;
+}
+
+img {
+    display: inline-block;
+}
+
+.center {
+    display: inline-block;
+    text-align: center;
+    padding-top: 50px;
+    width: 100%;
+}
+
+.header {
+
+    margin: auto;
+    text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.courses {
+    border: 5px solid #5bc0de;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#mainText {
+    border: 5px solid #5bc0de;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+#ects {
+    margin-left: 20px;
+}
+
+#previousButton {
+    margin-left: 20px;
+
+}
+
+.addBtn {
+    margin-left: 20px;
+}
+
+/*.table-wrap {
+    width: 75%;
+    margin: auto;
+}*/
+
+.table-wrap{
+    width: 85%;
+    margin: auto;
+    border-style: solid;
+    border-color: rgb(91, 192, 222);
+}
+.admin-panel{
+    width: 58%;
+    margin: auto;
+    border-style: solid;
+    border-color: rgb(91, 192, 222);
+}
+.btn-block {
+    font-size: large;
+    margin-top: 20px;
+}
+.img{
+    margin: 0;
+}
+.Coordinator-Buttons{
+    border-style: solid;
+    border-color: rgb(91, 192, 222);
+    text-align: center;
+}
+.Back-Button{
+    text-align: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.Coordinator-panel{
+    border-style: solid;
+    border-color: rgb(91, 192, 222);
+}
+
+h2{
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.right{
+    float: right;
+}
+
+.fixed{
+    position: sticky;
+    top: 5px;
+}
+
+.table-300{
+    max-height: 74vh;
+}
+
+.overflow-y-scroll{
+    overflow-y: auto;
+}
+
+.blank{
+    width: 77px;
+}
+
+.inline-buttons{
+    /*margin-left: 50vh;
+    margin-bottom: 10vh;*/
+    display: inline;
+}
+
+#coursesSearchedStudents{
+    -webkit-transition: width 0.6s ease, margin 0.6s ease;
+    -moz-transition: width 0.6s ease, margin 0.6s ease;
+    -o-transition: width 0.6s ease, margin 0.6s ease;
+    transition: width 0.6s ease, margin 0.6s ease;
+}
+
+#coursesList{
+    -webkit-transition: width 0.6s ease, margin 0.6s ease;
+    -moz-transition: width 0.6s ease, margin 0.6s ease;
+    -o-transition: width 0.6s ease, margin 0.6s ease;
+    transition: width 0.6s ease, margin 0.6s ease;
+}
+
+.col-md-10{
+    margin-left: 0;
+}
+
+.modal {
+    text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+    .modal:before {
+        display: inline-block;
+        vertical-align: middle;
+        content: " ";
+        height: 100%;
+    }
+}
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+

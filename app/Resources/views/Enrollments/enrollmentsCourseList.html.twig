@@ -1,0 +1,127 @@
+{%  extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">List of Courses for Enrolments</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group">
+
+            {% for faculty in faculties %}
+
+                <button type="button" class="btn btn-danger facultyButton" id = "{{ faculty.shortName }}FacultyButton" data-toggle = "tooltip" data-trigger="hover" title = "{{ faculty.name }}">{{ faculty.shortName }}</button>
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class = "container" id = "mainText">
+        Here you can choose your courses. In the top you can choose which faculty you want to be visible.
+        You can also see how many ECTS points you currently have from the courses you selected.
+    </div>
+
+    <h1><span id = "ects" class="label label-info">0 ECTS</span></h1>
+
+    <div class = "table-wrap">
+
+    {% for faculty in faculties %}
+
+        <div id = "{{ faculty.shortName }}" class="faculty">
+            {{ render(controller('AppBundle:Enrollment:enrollmentsFaculty', { 'id':faculty.id })) }}
+        </div>
+
+    {% endfor %}
+
+        <div class = "panel panel-info courses table-responsive">
+            <div class = "panel-heading">
+                <h2>Selected Courses</h2>
+            </div>
+            <div class = "panel-body">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Form</th>
+                        <th>ECTS</th>
+                        <th>Level</th>
+                        <th>Type</th>
+                        <th>Syllabus</th>
+                    </tr>
+                    </thead>
+                    <tbody id="selectedCourses">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <table class = "table table-condensed">
+            <thead>
+            <tr>
+                <th>
+                    Course forms
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    L - Laboratory
+                </td>
+                <td>
+                    W - Lecture
+                </td>
+                <td>
+                    C - Exercises
+                </td>
+                <td>
+                    P - Project
+                </td>
+                <td>
+                    S - Seminary
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    {% if app.session.get('role') == 'Student' %}
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Summary
+    </button>
+    {% endif %}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Selected courses summary</h4>
+                </div>
+                {{ form_start(form) }}
+                <div class="modal-body">
+                    {#<p class="t"></p>#}
+                    {{ form_row(form.courses) }}
+                    <p >ECTS in total: </p>
+                    <p id="t_ects"></p>
+                </div>
+                <div class="modal-footer">
+                    {{ form_row(form.submit) }}
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+
+
+    </script>
+{% endblock %}

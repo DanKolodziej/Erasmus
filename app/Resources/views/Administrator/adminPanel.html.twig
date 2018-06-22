@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block header %}
+    <h1 class = "page-header">Administrator panel</h1>
+{% endblock %}
+
+{% block body %}
+
+        <div class = "table-wrap">
+
+        <a href="{{ path('internalCoordinatorList') }}"><button type="button" class="btn btn-primary addBtn">Internal Coordinators</button></a>
+
+        <a href="{{ path('dwmList') }}"><button type="button" class="btn btn-primary addBtn">DWMs</button></a>
+
+        <a href="{{ path('universityList') }}"><button type="button" class="btn btn-primary addBtn">Universities</button></a>
+
+        <a href="{{ path('facultyList') }}"><button type="button" class="btn btn-primary addBtn">Faculties</button></a>
+
+        <a href="{{ path('countryList') }}"><button type="button" class="btn btn-primary addBtn">Countries</button></a>
+
+        <a href="{{ path('semesterList') }}"><button type="button" class="btn btn-primary addBtn">Semesters</button></a>
+
+        </div>
+
+{% endblock %}
