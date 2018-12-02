@@ -20,5 +20,4 @@
 /bin/symfony_requirements
 /var/SymfonyRequirements.php
 /web/config.php
-/composer.lock
 /tests/*
