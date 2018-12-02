@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="btn-toolbar" role="toolbar">
+    <div class="btn-toolbar btn-toolbar-faculty" role="toolbar">
         <div class="btn-group" role="group">
 
             {% for faculty in faculties %}
@@ -104,7 +104,11 @@
                 </div>
                 {{ form_start(form) }}
                 <div class="modal-body">
-                    {#<p class="t"></p>#}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Course name, Code, ECTS</p>
+                        </div>
+                    </div>
                     {{ form_row(form.courses) }}
                     <p >ECTS in total: </p>
                     <p id="t_ects"></p>

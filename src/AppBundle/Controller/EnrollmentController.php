@@ -47,16 +47,20 @@ class EnrollmentController extends Controller {
 
             $coursesAsString = $form->getData()['courses'];
 
-            $ArrCoursesAsStrings = explode(',', $coursesAsString);
+            $ArrCoursesAsStrings = explode(';', $coursesAsString);
 
+            //var_dump($ArrCoursesAsStrings);
             $courses = [];
 
             if(isset($coursesAsString)){
                 foreach($ArrCoursesAsStrings as $courseAsString){
 
-                    $courseCode = str_replace(' ECTS', '', explode(': ', $courseAsString)[1]);
+                    //var_dump(explode(', ', $courseAsString));
+                    if($courseAsString !== ""){
 
-                    $courses[] = $this->getDoctrine()->getRepository('AppBundle:Course')->findOneByCode($courseCode);
+                        $courseCode = explode(', ', $courseAsString)[1];
+                        $courses[] = $this->getDoctrine()->getRepository('AppBundle:Course')->findOneByCode($courseCode);
+                    }
                 }
             }
 

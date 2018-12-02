@@ -35,6 +35,13 @@ class State
      */
     private $color;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
 
     /**
      * Get id
@@ -92,6 +99,30 @@ class State
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     *
+     * @return State
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
 

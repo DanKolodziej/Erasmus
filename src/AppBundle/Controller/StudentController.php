@@ -394,7 +394,7 @@ class StudentController extends Controller {
 
         $user = $this->getUser();
         $userService = $this->get('user_service');
-        $userService->InternalCoordinatorAccess($user);
+        $userService->InternalCoordinatorOrDeansOfficeAccess($user);
 
         $studentService = $this->get('student_service');
         $student = $studentService->getStudent($studentId);
@@ -421,7 +421,7 @@ class StudentController extends Controller {
 
         $user = $this->getUser();
         $userService = $this->get('user_service');
-        $userService->InternalCoordinatorAccess($user);
+        $userService->InternalCoordinatorOrDeansOfficeAccess($user);
 
         $studentService = $this->get('student_service');
         $student = $studentService->getStudent($studentId);

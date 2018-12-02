@@ -242,27 +242,39 @@ class CourseService
 
     public function addStudentCourseGrade($course, $student, $grade){
 
-        $courseStudent = $this->getStudentCourseEnrollment($course, $student);
-        $courseStudent->setGrade($grade);
+        $courseStudents = $this->getStudentCourseEnrollment($course, $student);
 
-        $this->saveStudentCourseEnrollment($courseStudent);
+        foreach ($courseStudents as $courseStudent) {
 
-        $this->logger->info('Successfully added grade for student: '.$student->getId().' in course: '.$course->getCode());
+            $courseStudent->setGrade($grade);
+            $this->saveStudentCourseEnrollment($courseStudent);
+        }
+//        $courseStudent->setGrade($grade);
+//
+//        $this->saveStudentCourseEnrollment($courseStudent);
+
+        $this->logger->info('Successfully added grade for student: '.$student.' in course: '.$course);
     }
 
     public function addStudentCourseNote($course, $student, $note){
 
-        $courseStudent = $this->getStudentCourseEnrollment($course, $student);
-        $courseStudent->setTextNote($note);
+        $courseStudents = $this->getStudentCourseEnrollment($course, $student);
 
-        $this->saveStudentCourseEnrollment($courseStudent);
+        foreach ($courseStudents as $courseStudent) {
 
-        $this->logger->info('Successfully added text note for student: '.$student->getId().' in course: '.$course->getCode());
+            $courseStudent->setTextNote($note);
+            $this->saveStudentCourseEnrollment($courseStudent);
+        }
+//        $courseStudent->setTextNote($note);
+//
+//        $this->saveStudentCourseEnrollment($courseStudent);
+
+        $this->logger->info('Successfully added text note for student: '.$student.' in course: '.$course);
     }
 
     public function getStudentCoursesGrades($studentId){
 
-        $courseStudents =  $this->em->getRepository('AppBundle:CourseStudent')->findBy(array("student" => $studentId), array('course' => 'ASC'));
+        $courseStudents =  $this->em->getRepository('AppBundle:CourseStudent')->findBy(array("student" => $studentId));
 
         $grades = [];
 
@@ -276,7 +288,7 @@ class CourseService
 
     public function getStudentCoursesNotes($studentId){
 
-        $studentCourses =  $this->em->getRepository('AppBundle:CourseStudent')->findBy(array("student" => $studentId), array('course' => 'ASC'));
+        $studentCourses =  $this->em->getRepository('AppBundle:CourseStudent')->findBy(array("student" => $studentId));
 
         $notes = [];
 

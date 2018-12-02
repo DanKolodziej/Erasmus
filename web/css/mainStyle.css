@@ -191,6 +191,7 @@ h2{
     /*margin-left: 50vh;
     margin-bottom: 10vh;*/
     display: inline;
+    padding-left: 0;
 }
 
 #coursesSearchedStudents{
@@ -228,5 +229,116 @@ h2{
     display: inline-block;
     text-align: left;
     vertical-align: middle;
+}
+
+.extra-vertical-margin {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#shift-sem-button {
+    margin-bottom: 5px !important;
+}
+
+@media (max-width: 1135px) {
+    .btn-toolbar-faculty-available-courses {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 970px) {
+    .btn-toolbar-enrollment-list {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1420px) {
+    .btn-toolbar-semesters-available-courses {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .previousButton, .currentButton, .nextButton, .otherButton {
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 991px) {
+    .toggle {
+        margin-top: 5px;
+    }
+    .right {
+        float: none;
+    }
+
+    #coursesSearchedStudents {
+        margin-top: 15px;
+    }
+
+    .back-button {
+        margin-left: 0;
+    }
+
+    .back-button-col {
+        padding-left: 0;
+    }
+}
+
+@media (max-width: 867px) {
+    .btn-toolbar-course-list {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .previousButton, .currentButton, .nextButton, .otherButton {
+        margin-top: 5px;
+    }
+
+    #previousButton, #currentButton, #nextButton, #otherButton {
+        margin-top: 5px;
+    }
+
+    #previousButton {
+        margin-left: 5px;
+    }
+
+    .btn-toolbar-semesters-available-courses {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 690px) {
+    .pwr-logo {
+        width: 80%;
+        /*display: none;*/
+    }
+}
+
+@media (max-width: 670px) {
+    .btn-toolbar-faculty {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 580px) {
+    .btn-toolbar {
+        width: 70%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    #previousButton {
+        margin-left: 5px;
+    }
 }
 

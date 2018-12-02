@@ -9,8 +9,8 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-md-6">
-                <a href="{{ path('studentList') }}"><button type="button" class="btn btn-primary addBtn">Go back to list of Students</button></a>
+            <div class="col-md-6 back-button-col">
+                <a href="{{ path('studentList') }}"><button type="button" class="btn btn-primary addBtn back-button">Go back to list of Students</button></a>
             </div>
             <div class="col-md-6 inline-buttons">
                 <input id="coursesListToggle" type="checkbox" checked data-toggle="toggle" data-on="courses list" data-off="courses list" data-onstyle="success" data-offstyle="danger">
@@ -100,7 +100,7 @@
                                 {% else %}
                                     <td class="coursesStudentsToggleable">-</td>
                                 {% endif %}
-                                <td  class="coursesStudentsToggleable"><button type="button" class="btn btn-default courseStudentStateHistoryButton" id="{{ course.id }}courseStudentStateHistoryButton{{ studentId }}" data-toggle="modal" data-target="#courseStudent{{ course.id }}{{ studentId }}History">{{ studentCoursesStates[loop.index-1] }}</button></td>
+                                <td class="coursesStudentsToggleable"><button type="button" class="btn btn-default courseStudentStateHistoryButton" id="{{ course.id }}courseStudentStateHistoryButton{{ studentId }}" data-toggle="modal" data-target="#courseStudent{{ course.id }}{{ studentId }}History">{{ studentCoursesStates[loop.index-1] }}</button></td>
                                 {% if coursesTransitions is defined %}
                                     {% for toState in coursesTransitions[course.name] %}
                                         <td class="coursesStudentsToggleable"><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
@@ -337,7 +337,7 @@
                     "                                                <div class=\"col-md-4\">\n" +
                     "                                                    <p>";
 
-                htmlCurrentCourseStudentStateName += courseStudentStates[i+1].name;
+                htmlCurrentCourseStudentStateName += courseStudentStates[i+1].description;
                 htmlCurrentCourseStudentStateName += "</p>\n" +
                     "                                                </div>";
 

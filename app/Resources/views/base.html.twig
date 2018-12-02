@@ -35,8 +35,8 @@
                             {% include 'DWM/dwmNavbar.html.twig' %}
                         {% endif %}
                     </ul>
-                    <img src="{{ asset('images/pwrLogo.png') }}"/>
-                    <div class="navbar-collapse collapse navbar-right">
+                    <img class="pwr-logo" src="{{ asset('images/pwrLogo.png') }}"/>
+                    <div class="navbar-nav navbar-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <p class="navbar-text">
                                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |

@@ -23,10 +23,10 @@ $(document).ready(function() {
     });
 
     function updateTextArea() {
-        var allVals = [];
+        var allVals = "";
 
             $('td :checkbox').each(function () {
-                if($(this).prop("checked")) allVals.push(" " + $(this).closest("tr").find('td:eq(2)').text() + " : " + $(this).closest("tr").find('td:eq(1)').text() + " ECTS: " + $(this).closest("tr").find('td:eq(4)').text());
+                if($(this).prop("checked")) allVals += ($(this).closest("tr").find('td:eq(2)').text() + ", " + $(this).closest("tr").find('td:eq(1)').text() + ", " + $(this).closest("tr").find('td:eq(4)').text() + ";\n");
             });
         $('.t').text(allVals);
         $('#t_ects').text(parseInt($("#ects").text()));

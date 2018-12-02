@@ -237,7 +237,7 @@ class CourseController extends Controller {
             ->where('c.course = :course AND c.student = :student')
             ->join('AppBundle:State', 's', 'WITH', 'c.state = s.stateId')
             ->join('AppBundle:User', 'u', 'WITH', 'c.person = u.id')
-            ->orderBy('c.date', 'ASC')
+            ->orderBy('c.date', 'DESC')
             ->setParameter('course', $courseId)
             ->setparameter('student', $studentId)
             ->getQuery()->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)->getArrayResult();
