@@ -52,7 +52,7 @@
                                     <td><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
                                 {% endfor %}
                             {% endif %}
-                            <td><a href="{{ path('studentCourseList', {'studentId': studentsIds[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>
+                            {#<td><a href="{{ path('studentCourseList', {'studentId': studentsIds[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>#}
                         </tr>
 
                         <div class="modal fade" id="courseStudent{{ course.id }}{{ studentsIds[loop.index-1] }}History" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
