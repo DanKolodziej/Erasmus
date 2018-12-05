@@ -231,16 +231,26 @@ class CourseController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $courseStudents = $em->createQueryBuilder()
-            ->select(array('c', 's', 'u'))
-            ->from('AppBundle:CourseStudent', 'c')
-            ->where('c.course = :course AND c.student = :student')
-            ->join('AppBundle:State', 's', 'WITH', 'c.state = s.stateId')
-            ->join('AppBundle:User', 'u', 'WITH', 'c.person = u.id')
-            ->orderBy('c.date', 'DESC')
-            ->setParameter('course', $courseId)
-            ->setparameter('student', $studentId)
-            ->getQuery()->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)->getArrayResult();
+//        $courseStudents = $em->createQueryBuilder()
+//            ->select(array('c', 's', 'u'))
+//            ->from('AppBundle:CourseStudent', 'c')
+//            ->where('c.course = :course AND c.student = :student')
+//            ->join('AppBundle:State', 's', 'WITH', 'c.state = s.stateId')
+//            ->join('AppBundle:User', 'u', 'WITH', 'c.person = u.id')
+//            ->orderBy('c.date', 'DESC')
+//            ->setParameter('course', $courseId)
+//            ->setparameter('student', $studentId)
+//            ->getQuery()->setHint(\Doctrine\ORM\Query::HINT_INCLUDE_META_COLUMNS, true)->getArrayResult();
+
+        $courseStudents = $em->createQuery('
+        SELECT s.description, c.date, u.name, u.surname
+        FROM AppBundle:CourseStudent c
+        JOIN AppBundle:State s WHERE c.state = s.stateId
+        JOIN AppBundle:User u WHERE c.person = u.id
+        WHERE c.course = :course AND c.student = :student
+        ORDER BY c.date DESC')->setParameter('course', $courseId)->setparameter('student', $studentId)->getResult();
+
+//        var_dump($courseStudents);
 
         $response = new Response(json_encode($courseStudents));
         $response->headers->set('Content-Type', 'application/json');

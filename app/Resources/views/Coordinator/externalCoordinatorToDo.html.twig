@@ -128,13 +128,13 @@
             "                                            </div>";
 
         courseStudentStateHistory.innerHTML = htmlCourseStudentStateHistory;
-        for(var i = 0; i < courseStudentStates.length; i+=3){
+        for(var i = 0; i < courseStudentStates.length; i++){
 
             var htmlCurrentCourseStudentStateName = "<div class=\"row bg-success\">\n" +
                 "                                                <div class=\"col-md-4\">\n" +
                 "                                                    <p>";
 
-            htmlCurrentCourseStudentStateName += courseStudentStates[i+1].description;
+            htmlCurrentCourseStudentStateName += courseStudentStates[i].description;
             htmlCurrentCourseStudentStateName += "</p>\n" +
                 "                                                </div>";
 
@@ -148,7 +148,7 @@
             var htmlCurrentCourseStudentStatePerson = "<div class=\"col-md-4\">\n" +
                 "                                                    <p>";
 
-            htmlCurrentCourseStudentStatePerson += courseStudentStates[i+2].name + " " + courseStudentStates[i+2].surname;
+            htmlCurrentCourseStudentStatePerson += courseStudentStates[i].name + " " + courseStudentStates[i].surname;
             htmlCurrentCourseStudentStatePerson += "</p>\n" +
                 "                                                </div>" +
                 "                                            </div>";

@@ -84,6 +84,7 @@ class StudentController extends Controller {
         if($form->isSubmitted() && $form->isValid()){
 
             $em = $this->getDoctrine()->getManager();
+            $student->setUniversity($em->getRepository('AppBundle:ExternalCoordinator')->find($student->getExternalCoordinator())->getUniversity());
             $em->persist($student);
             $em->flush();
             $userId = $student->getUser();
@@ -192,6 +193,7 @@ class StudentController extends Controller {
         if($form->isSubmitted() && $form->isValid()){
 
             $em = $this->getDoctrine()->getManager();
+            $student->setUniversity($em->getRepository('AppBundle:ExternalCoordinator')->find($student->getExternalCoordinator())->getUniversity());
             $userId = $student->getUser();
             $user = $em->getRepository('AppBundle:User')->find($userId);
             $userService->saveUser($user);
@@ -267,10 +269,14 @@ class StudentController extends Controller {
         $studentCourses = $query->getResult();
 
         $courses = [];
+        $grades = [];
+        $notes = [];
         $studentCoursesStates = [];
         $studentCoursesStatesIds = [];
         foreach ($studentCourses as $studentCourse){
             $courses[] = $em->getRepository('AppBundle:Course')->find($studentCourse->getCourse());
+            $grades[] = $studentCourse->getGrade();
+            $notes[] = $studentCourse->getTextNote();
             $studentCoursesStates[] = $studentCourse->getState()->getName();
             $studentCoursesStatesIds[] = $studentCourse->getState()->getId();
         }
@@ -299,10 +305,10 @@ class StudentController extends Controller {
         }
 
         $gradeForm = $this->createForm(CourseStudentGradeType::class);
-        $grades = $courseService->getStudentCoursesGrades($studentId);
+//        $grades = $courseService->getStudentCoursesGrades($studentId);
 
         $noteForm = $this->createForm(CourseStudentNoteType::class);
-        $notes = $courseService->getStudentCoursesNotes($studentId);
+//        $notes = $courseService->getStudentCoursesNotes($studentId);
 
         return $this->render('Coordinator/studentCourseList.html.twig', array('student' => $user, 'courses' => $courses, 'studentId' => $studentId,
             'studentCoursesStates' => $studentCoursesStates, 'coursesTransitions' => $coursesTransitions, 'transitions' => $transitions,

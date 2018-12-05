@@ -127,7 +127,7 @@
                                     <td><a href="{{ path('changeCourseState', {'studentId': studentId, 'courseId': course.id, 'stateName': toState.toState.name}) }}"><button type="button" class="btn btn-info">{{ toState.buttonString }}</button></a></td>
                                 {% endfor %}
                             {% endif %}
-                            <td><a href="{{ path('studentCourseList', {'studentId': studentsIdsByCourseFaculty[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>
+                            {#<td><a href="{{ path('studentCourseList', {'studentId': studentsIdsByCourseFaculty[loop.index-1]}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>#}
                         </tr>
                         <div class="modal fade" id="courseStudent{{ course.id }}{{ studentsIdsByCourseFaculty[loop.index-1] }}History" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
                             <div class="modal-dialog" role="document">
@@ -203,13 +203,13 @@
                 "                                            </div>";
 
             courseStudentStateHistory.innerHTML = htmlCourseStudentStateHistory;
-            for(var i = 0; i < courseStudentStates.length; i+=3){
+            for(var i = 0; i < courseStudentStates.length; i++){
 
                 var htmlCurrentCourseStudentStateName = "<div class=\"row bg-success\">\n" +
                     "                                                <div class=\"col-md-4\">\n" +
                     "                                                    <p>";
 
-                htmlCurrentCourseStudentStateName += courseStudentStates[i+1].description;
+                htmlCurrentCourseStudentStateName += courseStudentStates[i].description;
                 htmlCurrentCourseStudentStateName += "</p>\n" +
                     "                                                </div>";
 
@@ -223,7 +223,7 @@
                 var htmlCurrentCourseStudentStatePerson = "<div class=\"col-md-4\">\n" +
                     "                                                    <p>";
 
-                htmlCurrentCourseStudentStatePerson += courseStudentStates[i+2].name + " " + courseStudentStates[i+2].surname;
+                htmlCurrentCourseStudentStatePerson += courseStudentStates[i].name + " " + courseStudentStates[i].surname;
                 htmlCurrentCourseStudentStatePerson += "</p>\n" +
                     "                                                </div>" +
                     "                                            </div>";
