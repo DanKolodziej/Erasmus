@@ -113,10 +113,21 @@ class DWMController extends Controller {
         $dwm = $this->getDoctrine()->getRepository('AppBundle:DWM')->findOneByUser($id);
         $user = $userService->getUser($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($dwm);
-        $em->remove($user);
-        $em->flush();
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($dwm);
+            $em->remove($user);
+            $em->flush();
+        } catch(\Doctrine\DBAL\DBALException $e) {
+
+            $this->addFlash('error', 'Can not currently delete this dwm worker.');
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($dwm);
+//        $em->remove($user);
+//        $em->flush();
 
         return $this->redirectToRoute('dwmList');
     }
