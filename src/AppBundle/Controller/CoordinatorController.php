@@ -246,10 +246,22 @@ class CoordinatorController extends Controller {
         $internalCoordinator = $this->getDoctrine()->getRepository('AppBundle:InternalCoordinator')->findOneByUser($id);
         $user = $userService->getUser($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($internalCoordinator);
-        $em->remove($user);
-        $em->flush();
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($internalCoordinator);
+            $em->remove($user);
+            $em->flush();
+        } catch(\Doctrine\DBAL\DBALException $e) {
+
+            $this->addFlash('error', 'Can not currently delete this internal coordinator. 
+            There are courses or students with courses assigned to him/her');
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($internalCoordinator);
+//        $em->remove($user);
+//        $em->flush();
 
         return $this->redirectToRoute('internalCoordinatorList');
     }
@@ -448,10 +460,22 @@ class CoordinatorController extends Controller {
         $externalCoordinator = $this->getDoctrine()->getRepository('AppBundle:ExternalCoordinator')->findOneByUser($id);
         $user = $userService->getUser($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($externalCoordinator);
-        $em->remove($user);
-        $em->flush();
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($externalCoordinator);
+            $em->remove($user);
+            $em->flush();
+        } catch(\Doctrine\DBAL\DBALException $e) {
+
+            $this->addFlash('error', 'Can not currently delete this external coordinator. 
+            There are students assigned to him/her');
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($externalCoordinator);
+//        $em->remove($user);
+//        $em->flush();
 
         return $this->redirectToRoute('externalCoordinatorList');
     }

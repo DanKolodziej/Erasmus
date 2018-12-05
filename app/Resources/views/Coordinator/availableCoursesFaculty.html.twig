@@ -3,9 +3,9 @@
         <h2>{{ facultyShortName }} - {{ facultyName }}</h2>
     </div>
     <div class = "btn-toolbar btn-toolbar-semesters-available-courses">
-        <td><button type="button" id = "previousButton{{ facultyShortName }}" class="previousButton btn btn-success active">Semester Winter 2016/2017</button></td>
-        <td><button type="button" id = "currentButton{{ facultyShortName }}" class="currentButton btn btn-success active">Semester Summer 2016/2017</button></td>
-        <td><button type="button" id = "nextButton{{ facultyShortName }}" class="nextButton btn btn-success active">Semester Winter 2017/2018</button></td>
+        <td><button type="button" id = "previousButton{{ facultyShortName }}" class="previousButton btn btn-success active">Semester {{ previousSemester.season }} {{ previousSemester.year }}</button></td>
+        <td><button type="button" id = "currentButton{{ facultyShortName }}" class="currentButton btn btn-success active">Semester {{ currentSemester.season }} {{ currentSemester.year }}</button></td>
+        <td><button type="button" id = "nextButton{{ facultyShortName }}" class="nextButton btn btn-success active">Semester {{ nextSemester.season }} {{ nextSemester.year }}</button></td>
         <td><button type="button" id = "otherButton{{ facultyShortName }}" class="otherButton btn btn-success active">Semester - Other</button></td>
     </div>
     <div class = "panel-body">

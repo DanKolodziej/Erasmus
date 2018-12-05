@@ -212,10 +212,22 @@ class DeansOfficeController extends Controller {
         $deansOffice = $this->getDoctrine()->getRepository('AppBundle:DeansOffice')->findOneByUser($id);
         $user = $userService->getUser($id);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($deansOffice);
-        $em->remove($user);
-        $em->flush();
+        try {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($deansOffice);
+            $em->remove($user);
+            $em->flush();
+        } catch(\Doctrine\DBAL\DBALException $e) {
+
+            $this->addFlash('error', 'Can not currently delete this deans office worker. 
+            There are students with courses assigned to him/her');
+        }
+
+//        $em = $this->getDoctrine()->getManager();
+//        $em->remove($deansOffice);
+//        $em->remove($user);
+//        $em->flush();
 
         return $this->redirectToRoute('deansOfficeList');
     }
