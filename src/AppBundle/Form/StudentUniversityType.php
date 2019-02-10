@@ -26,39 +26,39 @@ class StudentUniversityType extends AbstractType {
 
         $builder
             ->add('user', UserExtensionType::class, array('label' => false, 'constraints' => array(new Valid())))
-//            ->add('university', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:University',
-//                'choice_label' => 'name', 'attr' => array('style' => 'margin:15px')))
-//            ->add('externalCoordinator', HiddenType::class)
-//            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-//
-//                $form = $event->getForm();
-//                $university = $event->getData()->getUniversity();
-//
-//                $formOptions = array(
-//                    'expanded' => false,
-//                    'multiple' => false,
-//                    'class'         => 'AppBundle:ExternalCoordinator',
-//                    'choice_label'  => function($externalCoordinator){
-//
-//                        return $externalCoordinator->getUser()->getName().' '.$externalCoordinator->getUser()->getSurname();
-//                    },
-////                    'query_builder' => function (EntityRepository $er) use ($form) {
-////                        return $er->createQueryBuilder('c')
-////                            ->where('c.university = ?1')
-////                            ->setParameter(1,$form->get("university")->getData());
-////                    },
-//                    'placeholder' => 'Choose university first',
-//                    'attr' => array('style' => 'margin:15px')
-//                );
-//
-//                $form->add('externalCoordinator', EntityType::class, $formOptions);
-//            })
-            ->add('externalCoordinator', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:ExternalCoordinator',
-                'choice_label'  => function($externalCoordinator){
+            ->add('university', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:University',
+                'choice_label' => 'name', 'attr' => array('style' => 'margin:15px')))
+            ->add('externalCoordinator', HiddenType::class)
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
 
-                    return $externalCoordinator->getUser()->getName().' '.$externalCoordinator->getUser()->getSurname();
-                }, 'attr' => array('style' => 'margin:15px')
-            ))
+                $form = $event->getForm();
+                $university = $event->getData()->getUniversity();
+
+                $formOptions = array(
+                    'expanded' => false,
+                    'multiple' => false,
+                    'class'         => 'AppBundle:ExternalCoordinator',
+                    'choice_label'  => function($externalCoordinator){
+
+                        return $externalCoordinator->getUser()->getName().' '.$externalCoordinator->getUser()->getSurname();
+                    },
+//                    'query_builder' => function (EntityRepository $er) use ($form) {
+//                        return $er->createQueryBuilder('c')
+//                            ->where('c.university = ?1')
+//                            ->setParameter(1,$form->get("university")->getData());
+//                    },
+                    'placeholder' => 'Choose university first',
+                    'attr' => array('style' => 'margin:15px')
+                );
+
+                $form->add('externalCoordinator', EntityType::class, $formOptions);
+            })
+//            ->add('externalCoordinator', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:ExternalCoordinator',
+//                'choice_label'  => function($externalCoordinator){
+//
+//                    return $externalCoordinator->getUser()->getName().' '.$externalCoordinator->getUser()->getSurname();
+//                }, 'attr' => array('style' => 'margin:15px')
+//            ))
             ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
     }
 
