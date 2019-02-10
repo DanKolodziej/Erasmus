@@ -125,9 +125,9 @@ class EnrollmentController extends Controller {
     }
 
     /**
-     * @Route("enrollments/sendToAcceptation/{courses}", name="enrollmentsSendToAcceptation")
+     * @Route("enrollments/sendToAcceptation", name="enrollmentsSendToAcceptation")
      */
-    public function enrollmentsSendToAcceptationAction($courses){
+    public function enrollmentsSendToAcceptationAction(Request $request){
 
         $user = $this->getUser();
 
@@ -137,6 +137,7 @@ class EnrollmentController extends Controller {
         $studentSurname = $user->getSurname();
         $studentId = $student->getId();
 
+        $courses = $request->request->get('courses');
         $courses = urldecode($courses);
         $courses = unserialize($courses);
 
@@ -174,6 +175,9 @@ class EnrollmentController extends Controller {
         }
 
         return $this->redirectToRoute("enrollmentsState");
+//        $response = $this->forward('AppBundle:Enrollment:enrollmentsState');
+//
+//        return $response;
     }
 
     /**

@@ -46,6 +46,27 @@
         </div>
     </div>
 
-    <a href="{{ path('enrollmentsSendToAcceptation', {'courses': coursesAsString}) }}"><button type="button" class="btn btn-primary btn-lg">Send to acceptation</button></a>
+    <button type="button" id="sendToAcceptationButton" class="btn btn-primary btn-lg">Send to acceptation</button>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+        var sendToAcceptationButton = document.getElementById("sendToAcceptationButton");
+
+        sendToAcceptationButton.addEventListener("click", function(){
+            var ourRequest = new XMLHttpRequest();
+            var url = "{{ url('enrollmentsSendToAcceptation') }}";
+            var coursesAsString = "{{ coursesAsString }}";
+            ourRequest.open('POST', url, true);
+            ourRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            ourRequest.onreadystatechange = function() {
+                window.location.href = "{{ url('enrollmentsState') }}"
+            };
+
+            ourRequest.send("courses=" + coursesAsString);
+        });
+    </script>
 
 {% endblock %}
