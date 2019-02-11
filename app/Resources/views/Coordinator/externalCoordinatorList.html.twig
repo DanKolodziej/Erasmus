@@ -56,7 +56,6 @@
             <td>{{ externalCoordinator.surname }}</td>
 
             <td><a href="{{ path('editExternalCoordinator', {'id': externalCoordinator.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-            {#<td><a href="{{ path('deleteExternalCoordinator', {'id': externalCoordinator.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>#}
             <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#externalCoordinator{{ externalCoordinator.id }}DeleteAlert">Delete</button></td>
 
             <div class="modal fade" id="externalCoordinator{{ externalCoordinator.id }}DeleteAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

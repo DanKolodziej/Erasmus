@@ -55,7 +55,6 @@
             <td>{{ deansOffice.surname }}</td>
 
             <td><a href="{{ path('editDeansOffice', {'id': deansOffice.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-            {#<td><a href="{{ path('deleteDeansOffice', {'id': deansOffice.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>#}
             <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deansOffice{{ deansOffice.id }}DeleteAlert">Delete</button></td>
             <div class="modal fade" id="deansOffice{{ deansOffice.id }}DeleteAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
