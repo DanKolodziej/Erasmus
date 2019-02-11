@@ -12,7 +12,7 @@
         </div>
     {% endfor %}
 
-    <div class = "panel panel-info courses table-responsive">
+    <div class = "panel panel-info courses table-responsive list-margins">
         <div class = "panel-body">
             <table class="table table-condensed">
                 {% block listName %}
@@ -32,4 +32,85 @@
         </div>
     </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $("th").on("click", function(){
+
+            var sortingIndex = $(this).parent().children().index($(this));
+            var numberOfHeaders = $(this).parent().children().length;
+            console.log("sortingIndex: "+ sortingIndex);
+            console.log("numberOfHeaders: " + numberOfHeaders);
+            var rowList = $(this).closest('table').find('tbody').find('tr').toArray().map(function(x){
+
+                var rowValues = [];
+                for(var i = 0; i < numberOfHeaders; i++){
+
+                    rowValues.push(x.cells[i].innerText);
+                    console.log("cell inner text: " + x.cells[i].innerText);
+                }
+
+                console.log(x.cells[numberOfHeaders].className);
+                var href = x.cells[numberOfHeaders].innerHTML.split('"')[1];
+                var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                console.log("href: " + href);
+                console.log("hrefId: " + href.replace( /^\D+/g, ''));
+
+                return rowValues;
+            });
+
+            rowList.sort(function(a, b) {
+                if (a[sortingIndex] < b[sortingIndex]) {
+
+                    return -1;
+                }
+                if (a[sortingIndex] > b[sortingIndex]) {
+
+                    return 1;
+                }
+
+                return 0;
+            });
+
+            var numberOfRows = $('tbody tr').length;
+            var numberOfColumns = rowList[0].length+1;
+
+            $("tbody tr").each(function(rowIndex){
+
+                var $row = $(this);
+                $row.children().each(function(columnIndex)
+                {
+                    if(columnIndex < numberOfHeaders){
+                        $(this).text(rowList[rowIndex][columnIndex]);
+                    } else{
+                        var html = $(this).html().split('"');
+                        if ($(this).html().indexOf("data-target") !== -1) {
+                            var href = html[7];
+                            console.log("html: " + html);
+                            var hrefId = rowList[rowIndex][numberOfHeaders];
+                            console.log("href: " + href);
+                            href = href.replace(/\d+/g, hrefId);
+                            console.log("href: " + href);
+                            console.log("hrefId: " + hrefId);
+                            html[7] = href;
+                            html = html.join('"');
+                            $(this).html(html);
+                        } else {
+                            var href = html[1];
+                            console.log("html: " + html);
+                            console.log("href: " + href);
+                            var hrefId = rowList[rowIndex][numberOfHeaders];
+                            console.log("hrefId: " + hrefId);
+                            href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
+                            html[1] = href;
+                            html = html.join('"');
+                            $(this).html(html);
+                        }
+                    }
+                });
+            })
+
+        });
+    </script>
 {% endblock %}

@@ -29,8 +29,8 @@ class CourseController extends Controller {
         $course = new Course();
 
         $form = $this->createForm(CourseType::class, $course);
-        $form->add('save', SubmitType::class, array('label' => 'Add Course', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')))
-            ->add('saveAndEnd', SubmitType::class, array('label' => 'Add course and end', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+        $form->add('save', SubmitType::class, array('label' => 'Add Course', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')))
+            ->add('saveAndEnd', SubmitType::class, array('label' => 'Add course and end', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
 
         $form->handleRequest($request);
 
@@ -74,7 +74,7 @@ class CourseController extends Controller {
         }
 
         $form = $this->createForm(CourseType::class, $course);
-        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left:20px')));
+        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left:5%')));
 
         $form->handleRequest($request);
 

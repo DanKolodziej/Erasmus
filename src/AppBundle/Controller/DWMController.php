@@ -28,7 +28,7 @@ class DWMController extends Controller {
         $user = $userManager->createUser();
 
         $form = $this->createForm(UserNoFacultyExtensionType::class, $user);
-        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
@@ -84,7 +84,7 @@ class DWMController extends Controller {
         $user = $userService->getUser($id);
 
         $form = $this->createForm(UserNoFacultyExtensionType::class, $user);
-        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+        $form->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){

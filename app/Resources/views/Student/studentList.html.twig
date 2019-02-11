@@ -9,9 +9,7 @@
 
     <div class = "table-wrap">
 
-        {#<a href="{{ path('internalCoordinator') }}"><button type="button" class="btn btn-primary Back-Button">Back</button></a>#}
-
-        <h2 class="header">{{ formTitle }}</h2>
+        <h2 class="header" style="margin-top: 10px">{{ formTitle }}</h2>
         {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -39,10 +37,10 @@
 {% block tableHeader %}
 
     <tr>
-        <th>No.</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Index Number</th>
+        <th class="hover-col">No. <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></th>
+        <th class="hover-col">Name <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span></th>
+        <th class="hover-col">Surname <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span></th>
+        <th class="hover-col">Index Number <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></th>
     </tr>
 
 {% endblock %}
@@ -58,7 +56,28 @@
 
         {% if app.session.get('role') == 'Internal Coordinator' %}
             <td><a href="{{ path('editStudent', {'id': student.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
-            <td><a href="{{ path('deleteStudent', {'id': student.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+            {#<td><a href="{{ path('deleteStudent', {'id': student.id}) }}"><button type="button" class="btn btn-danger">Delete</button></a></td>#}
+            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#student{{ student.id }}DeleteAlert">Delete</button></td>
+
+            <div class="modal fade" id="student{{ student.id }}DeleteAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Student deletion</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this student?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ path('deleteStudent', {'id': student.id}) }}"><button type="button" class="btn btn-primary">Yes</button></a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <td><a href="{{ path('studentCourseList', {'studentId': studentArr[loop.index-1].id}) }}"><button type="button" class="btn btn-info">Students Courses</button></a></td>
             <td><a href="{{ path('assignStudentIndex', {'studentId': studentArr[loop.index-1].id}) }}"><button type="button" class="btn btn-info">Assign Student Index</button></a></td>
@@ -84,6 +103,83 @@
 {% block javascripts %}
 
     <script>
+        $("th").on("click", function(){
+
+            var sortingIndex = $(this).parent().children().index($(this));
+            var numberOfHeaders = $(this).parent().children().length;
+            console.log("sortingIndex: "+ sortingIndex);
+            console.log("numberOfHeaders: " + numberOfHeaders);
+            var rowList = $(this).closest('table').find('tbody').find('tr').toArray().map(function(x){
+
+                var rowValues = [];
+                for(var i = 0; i < numberOfHeaders; i++){
+
+                    rowValues.push(x.cells[i].innerText);
+                    console.log("cell inner text: " + x.cells[i].innerText);
+                }
+
+                console.log(x.cells[numberOfHeaders].className);
+                var href = x.cells[numberOfHeaders].innerHTML.split('"')[1];
+                var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                console.log("href: " + href);
+                console.log("hrefId: " + href.replace( /^\D+/g, ''));
+
+                return rowValues;
+            });
+
+            rowList.sort(function(a, b) {
+                if (a[sortingIndex] < b[sortingIndex]) {
+
+                    return -1;
+                }
+                if (a[sortingIndex] > b[sortingIndex]) {
+
+                    return 1;
+                }
+
+                return 0;
+            });
+
+            var numberOfRows = $('tbody tr').length;
+            var numberOfColumns = rowList[0].length+1;
+
+            $("tbody tr").each(function(rowIndex){
+
+                var $row = $(this);
+                $row.children().each(function(columnIndex)
+                {
+                    if(columnIndex < numberOfHeaders){
+                        $(this).text(rowList[rowIndex][columnIndex]);
+                    } else{
+                        var html = $(this).html().split('"');
+                        if ($(this).html().indexOf("data-target") !== -1) {
+                            var href = html[7];
+                            console.log("html: " + html);
+                            var hrefId = rowList[rowIndex][numberOfHeaders];
+                            console.log("href: " + href);
+                            href = href.replace(/\d+/g, hrefId);
+                            console.log("href: " + href);
+                            console.log("hrefId: " + hrefId);
+                            html[7] = href;
+                            html = html.join('"');
+                            $(this).html(html);
+                        } else {
+                            var href = html[1];
+                            console.log("html: " + html);
+                            console.log("href: " + href);
+                            var hrefId = rowList[rowIndex][numberOfHeaders];
+                            console.log("hrefId: " + hrefId);
+                            href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
+                            html[1] = href;
+                            html = html.join('"');
+                            $(this).html(html);
+                        }
+                    }
+                });
+            })
+
+        });
+
         $("#student_university_university").change(function(){
 
             var data = {

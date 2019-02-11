@@ -24,8 +24,8 @@ class ExternalCoordinatorType extends AbstractType {
         $builder
             ->add('user', UserNoFacultyExtensionType::class, array('label' => false, 'constraints' => array(new Valid())))
             ->add('university', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:University',
-                'choice_label' => 'name', 'attr' => array('style' => 'margin:15px')))
-            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+                'choice_label' => 'name', 'attr' => array('style' => 'margin:15px'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
     }
 
     public function configureOptions(OptionsResolver $resolver)

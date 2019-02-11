@@ -18,13 +18,13 @@ class FacultyType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('shortName', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+            ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('shortName', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
             ->add('upperFaculty', EntityType::class, array('expanded' => false, 'multiple' => false, 'class' => 'AppBundle:faculty',
                 'choice_label' => function($upperFaculty){
                     return $upperFaculty->getShortName().' - '.$upperFaculty->getName();
-                }, 'required' => false, 'attr' => array('style' => 'margin:15px')))
-            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+                }, 'required' => false, 'attr' => array('style' => 'margin:15px'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
     }
 
     public function configureOptions(OptionsResolver $resolver)

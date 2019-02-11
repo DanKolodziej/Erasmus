@@ -18,9 +18,9 @@ class CountryType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array('label' => 'Country Name', 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('code', TextType::class, array('label' => 'Country Code', 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 20px')));
+            ->add('name', TextType::class, array('label' => 'Country Name', 'attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('code', TextType::class, array('label' => 'Country Code', 'attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('save', SubmitType::class, array('label' => 'Save', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px; margin-left: 5%')));
     }
 
     public function configureOptions(OptionsResolver $resolver)

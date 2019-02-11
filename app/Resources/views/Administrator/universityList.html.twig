@@ -9,9 +9,7 @@
 
     <div class = "table-wrap">
 
-        {#<a href="{{ path('panel') }}"><button type="button" class="btn btn-primary Back-Button">Back</button></a>#}
-
-        <h2 class="header">{{ formTitle }}</h2>
+        <h2 class="header" style="margin-top: 10px">{{ formTitle }}</h2>
         {{ form(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -39,10 +37,10 @@
 {% block tableHeader %}
 
     <tr>
-        <th>No.</th>
-        <th>Name</th>
-        <th>Code</th>
-        <th>Country</th>
+        <th class="hover-col">No. <span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></th>
+        <th class="hover-col">Name <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span></th>
+        <th class="hover-col">Code <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span></th>
+        <th class="hover-col">Country <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span></th>
     </tr>
 
 {% endblock %}
@@ -56,8 +54,8 @@
             <td>{{ university.code }}</td>
             <td>{{ university.country }}</td>
 
-            <td class="university{{ university.id }}"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#university{{ university.id }}DeleteAlert">Delete</button></td>
-            <td class="university{{ university.id }}"><a href="{{ path('editUniversity', {'id': university.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+            <td><a href="{{ path('editUniversity', {'id': university.id}) }}"><button type="button" class="btn btn-warning">Edit</button></a></td>
+            <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#university{{ university.id }}DeleteAlert">Delete</button></td>
 
             <div class="modal fade" id="university{{ university.id }}DeleteAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">

@@ -240,11 +240,30 @@ h2{
     margin-bottom: 5px !important;
 }
 
+.hover-col {
+    cursor: pointer;
+}
+
+.hover-col:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.list-margins {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 @media (max-width: 1135px) {
     .btn-toolbar-faculty-available-courses {
         width: 70%;
-        margin-top: 15px;
         margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .btn-toolbar-faculty-available-courses {
+        margin-top: 15px;
     }
 }
 

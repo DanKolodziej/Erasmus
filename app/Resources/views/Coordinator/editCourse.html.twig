@@ -6,8 +6,8 @@
 
 {% block body %}
 
-    <div class = "table-wrap">
-    <a href="{{ path('coursesList') }}"><button type="button" class="btn btn-success addBtn">Go back to list of courses</button></a>
+    <div class = "table-wrap" style="margin-bottom: 20px">
+    {#<a href="{{ path('coursesList') }}"><button type="button" class="btn btn-success addBtn" style="margin-top: 10px; margin-bottom: 10px">Go back to list of courses</button></a>#}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     {{ form_end(form) }}

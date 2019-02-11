@@ -18,11 +18,11 @@ class CourseType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('form', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('ects', IntegerType::class, array('attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
-            ->add('syllabus', FileType::class, array('required' => false, 'attr' => array('class' => 'form-control', 'style' => 'margin-bottom:15px')))
+            ->add('code', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('name', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('form', TextType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('ects', IntegerType::class, array('attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
+            ->add('syllabus', FileType::class, array('required' => false, 'attr' => array('class' => 'form-control', 'style' => 'width: 90%; margin: auto; margin-bottom:15px;'), 'label_attr' => array('style' => 'margin-left: 5%')))
             ->add('level', ChoiceType::class, array('expanded' => true, 'multiple' => false,
                 'choices' => array(
                 'I - inż' => 'I - inż',
@@ -31,13 +31,13 @@ class CourseType extends AbstractType {
                 'I - inż' => array('style' => 'margin-right: 15px'),
                 'II - mgr' => array('style' => 'margin-left: 15px; margin-right: 15px'),
                 'III - dr' => array('style' => 'margin-left: 15px; margin-right: 15px')
-            )))
+            ), 'label_attr' => array('style' => 'margin-left: 5%')))
             ->add('type', ChoiceType::class, array('expanded' => false, 'multiple' => false, 'choices' => array(
-                'Compulsory' => 'Compulsory', 'Selective' => 'Selective'), 'attr' => array('class' => 'btn btn-default', 'style' => 'margin:15px')))
+                'Compulsory' => 'Compulsory', 'Selective' => 'Selective'), 'attr' => array('class' => 'btn btn-default', 'style' => 'margin:15px'), 'label_attr' => array('style' => 'margin-left: 5%')))
             ->add('semesters', EntityType::class, array('expanded' => true, 'multiple' => true, 'class' => 'AppBundle:Semester',
                 'choice_label' => function($semester){
                     return $semester->getSeason().' '.$semester->getYear();
-                }, 'attr' => array('class' => 'btn btn-default', 'style' => 'margin:15px')));
+                }, 'attr' => array('class' => 'btn btn-default', 'style' => 'margin:15px'), 'label_attr' => array('style' => 'margin-left: 5%')));
 
     }
 
