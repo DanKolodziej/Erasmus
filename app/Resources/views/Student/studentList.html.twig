@@ -117,6 +117,10 @@
                 var href = x.cells[numberOfHeaders].innerHTML.split('"')[1];
                 var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
 
+                href = x.cells[numberOfHeaders + 2].innerHTML.split('"')[1];
+                console.log(href.replace( /^\D+/g, ''));
+                hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+
                 return rowValues;
             });
 
@@ -145,6 +149,7 @@
                         $(this).text(rowList[rowIndex][columnIndex]);
                     } else{
                         var html = $(this).html().split('"');
+                        console.log($(this).html());
                         if ($(this).html().indexOf("data-target") !== -1) {
                             var href = html[7];
                             var hrefId = rowList[rowIndex][numberOfHeaders];
@@ -152,9 +157,16 @@
                             html[7] = href;
                             html = html.join('"');
                             $(this).html(html);
-                        } else {
+                        } else if ($(this).html().indexOf("Edit") !== -1) {
                             var href = html[1];
                             var hrefId = rowList[rowIndex][numberOfHeaders];
+                            href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
+                            html[1] = href;
+                            html = html.join('"');
+                            $(this).html(html);
+                        } else {
+                            var href = html[1];
+                            var hrefId = rowList[rowIndex][numberOfHeaders + 1];
                             href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
                             html[1] = href;
                             html = html.join('"');
