@@ -106,6 +106,7 @@
 
             var sortingIndex = $(this).parent().children().index($(this));
             var numberOfHeaders = $(this).parent().children().length;
+            var numberOfColumns = $("table > tbody > tr:first > td").length;
             var rowList = $(this).closest('table').find('tbody').find('tr').toArray().map(function(x){
 
                 var rowValues = [];
@@ -113,13 +114,19 @@
 
                     rowValues.push(x.cells[i].innerText);
                 }
+                console.log("row length: " + numberOfColumns);
 
-                var href = x.cells[numberOfHeaders].innerHTML.split('"')[1];
-                var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                for (var i = numberOfHeaders; i < numberOfColumns; i++) {
+                    var href = x.cells[i].innerHTML.split('"')[1];
+                    var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                }
 
-                href = x.cells[numberOfHeaders + 2].innerHTML.split('"')[1];
-                console.log(href.replace( /^\D+/g, ''));
-                hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                // var href = x.cells[numberOfHeaders].innerHTML.split('"')[1];
+                // var hrefId = rowValues.push(href.replace( /^\D+/g, ''));
+                //
+                // href = x.cells[numberOfHeaders + 2].innerHTML.split('"')[1];
+                // console.log(href.replace( /^\D+/g, ''));
+                // hrefId = rowValues.push(href.replace( /^\D+/g, ''));
 
                 return rowValues;
             });
@@ -157,16 +164,9 @@
                             html[7] = href;
                             html = html.join('"');
                             $(this).html(html);
-                        } else if ($(this).html().indexOf("Edit") !== -1) {
-                            var href = html[1];
-                            var hrefId = rowList[rowIndex][numberOfHeaders];
-                            href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
-                            html[1] = href;
-                            html = html.join('"');
-                            $(this).html(html);
                         } else {
                             var href = html[1];
-                            var hrefId = rowList[rowIndex][numberOfHeaders + 1];
+                            var hrefId = rowList[rowIndex][columnIndex];
                             href = href.slice(0, href.lastIndexOf('/')+1) + hrefId;
                             html[1] = href;
                             html = html.join('"');

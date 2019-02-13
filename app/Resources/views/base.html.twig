@@ -3,12 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Erasmus+{% endblock %}</title>
-        {#<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"#}
-              {#integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">#}
         <link rel="stylesheet" href="{{ asset('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}" />
-        {#<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">#}
         <link rel="stylesheet" href="{{ asset('jquery-ui-1.12.1.custom/jquery-ui.css') }}" />
-        {#<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">#}
         <link rel="stylesheet" href="{{ asset('bootstrap-toggle-master/css/bootstrap-toggle.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/mainStyle.css') }}" />
         {% block stylesheets %}{% endblock %}
@@ -59,14 +55,9 @@
                 </div>
             </nav>
             {% block body %}{% endblock %}
-            {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>#}
             <script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-            {#<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>#}
             <script type="text/javascript" src="{{ asset('jquery-ui-1.12.1.custom/jquery-ui.js') }}"></script>
-            {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"#}
-                    {#integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>#}
             <script type="text/javascript" src="{{ asset('bootstrap-3.3.7-dist/js/bootstrap.min.js') }}"></script>
-            {#<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>#}
             <script type="text/javascript" src="{{ asset('bootstrap-toggle-master/js/bootstrap-toggle.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('js/mainScript.js') }}"></script>
             {% block javascripts %}{% endblock %}
