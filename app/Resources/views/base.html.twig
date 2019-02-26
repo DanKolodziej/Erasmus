@@ -15,8 +15,14 @@
         <div class="container-fluid">
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    {% block header %}{% endblock %}
+                    <h1 class="page-header">
+                        <img class="pwr-logo" height="50" src="{{ asset('images/pwr-logo.png') }}"/>
+                        <span class="header-text">
+                            {% block header %}{% endblock %}
+                        </span>
+                    </h1>
                     <ul class="nav navbar-nav navbar-left">
+                        {#<li><img class="pwr-logo" height="50" src="{{ asset('images/pwr-logo.png') }}"/></li>#}
                         <li><p class="navbar-text"><a href="{{ path('homepage') }}" class="navbar-link">Home</a></p></li>
                         <li><p class="navbar-text"><a href="{{ path('enrollments') }}" class="navbar-link">Enrollments</a></p></li>
                         {% if app.session.get('role') == 'Administrator' %}
@@ -33,8 +39,8 @@
                             {% include 'DWM/dwmNavbar.html.twig' %}
                         {% endif %}
                     </ul>
-                    <img class="pwr-logo" src="{{ asset('images/pwrLogo.png') }}"/>
-                    <div class="navbar-nav navbar-right">
+                    {#<img class="pwr-logo" height="50" src="{{ asset('images/pwrLogo.png') }}"/>#}
+                    <ul class="nav navbar-nav navbar-right">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             <p class="navbar-text">
                                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
@@ -44,13 +50,13 @@
                             </p>
                             <h3>{{ app.session.get('role') }}</h3>
                         {% else %}
-                            <ul class="nav navbar-nav">
+                            {#<ul class="nav navbar-nav">#}
                                 <li><p class="navbar-text">
                                         <a href="{{ path('fos_user_security_login') }}" class="navbar-link">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
                                     </p></li>
-                            </ul>
+                            {#</ul>#}
                         {% endif %}
-                    </div>
+                    </ul>
 
                 </div>
             </nav>

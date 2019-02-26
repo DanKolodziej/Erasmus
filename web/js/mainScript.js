@@ -174,4 +174,8 @@ $(document).ready(function() {
         }
     });
 
+    $("#addToggle").on("change", function () {
+        $(".table-wrap").toggle("slow");
+    });
+
 });

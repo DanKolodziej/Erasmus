@@ -2,6 +2,8 @@
 
 {% block body %}
 
+    {#<input style="margin-bottom: 20px" id="addToggle" type="checkbox" data-toggle="toggle" data-on="add" data-off="add" data-onstyle="success" data-offstyle="danger">#}
+
     {% block addOrEditForm %}
 
     {% endblock %}
@@ -36,6 +38,12 @@
 
 {% block javascripts %}
     <script>
+        // $(document).ready(function() {
+        //     if (!$("#addToggle").prop("checked")) {
+        //         $(".table-wrap").hide();
+        //     }
+        // });
+
         $("th").on("click", function(){
 
             var sortingIndex = $(this).parent().children().index($(this));

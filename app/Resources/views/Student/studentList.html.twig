@@ -1,10 +1,12 @@
 {% extends "Basic/list.html.twig" %}
 
 {% block header %}
-    <h1 class = "page-header">Students</h1>
+    Students
 {% endblock %}
 
 {% block addOrEditForm %}
+    <input style="margin-bottom: 20px" id="addToggle" type="checkbox" data-toggle="toggle" data-on="add" data-off="add" data-onstyle="success" data-offstyle="danger">
+
     {% form_theme form _self %}
 
     <div class = "table-wrap">
@@ -102,6 +104,12 @@
 {% block javascripts %}
 
     <script>
+        $(document).ready(function() {
+            if (!$("#addToggle").prop("checked")) {
+                $(".table-wrap").hide();
+            }
+        });
+        
         $("th").on("click", function(){
 
             var sortingIndex = $(this).parent().children().index($(this));

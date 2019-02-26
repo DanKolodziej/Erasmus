@@ -25,7 +25,7 @@ class AdminController extends Controller {
         $userService = $this->get('user_service');
         $userService->administratorAccess($user);
 
-        return $this->render('Administrator/adminPanel.html.twig');
+        return $this->render('Basic/index.html.twig');
     }
 
     /**

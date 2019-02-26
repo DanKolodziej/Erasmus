@@ -254,6 +254,20 @@ h2{
     margin-bottom: 20px;
 }
 
+.navbar-left {
+    max-width: 75%;
+}
+
+.pwr-logo {
+    float: left;
+}
+
+@media (min-width: 1024px) {
+    .header-text {
+        margin-left: -234px;
+    }
+}
+
 @media (max-width: 1135px) {
     .btn-toolbar-faculty-available-courses {
         width: 70%;
@@ -334,13 +348,6 @@ h2{
     }
 }
 
-@media (max-width: 690px) {
-    .pwr-logo {
-        width: 80%;
-        /*display: none;*/
-    }
-}
-
 @media (max-width: 670px) {
     .btn-toolbar-faculty {
         width: 70%;
@@ -358,6 +365,12 @@ h2{
 
     #previousButton {
         margin-left: 5px;
+    }
+}
+
+@media (max-width: 270px) {
+    .pwr-logo {
+        width: 80%;
     }
 }
 
