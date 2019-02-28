@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block addOrEditForm %}
-    <input style="margin-bottom: 20px" id="addToggle" type="checkbox" data-toggle="toggle" data-on="add" data-off="add" data-onstyle="success" data-offstyle="danger">
+    {% block toggleFormButton %}
+        <input style="margin-bottom: 20px" id="addToggle" type="checkbox" data-toggle="toggle" data-on="add" data-off="add" data-onstyle="success" data-offstyle="danger">
+    {% endblock %}
 
     {% form_theme form _self %}
 
@@ -81,12 +83,12 @@
 
 {% endblock %}
 
-{% block javascripts %}
-    <script>
-        $(document).ready(function() {
-            if (!$("#addToggle").prop("checked")) {
-                $(".table-wrap").hide();
-            }
-        });
-    </script>
-{% endblock %}
+{#{% block javascripts %}#}
+    {#<script>#}
+        {#$(document).ready(function() {#}
+            {#if (!$("#addToggle").prop("checked")) {#}
+                {#$(".table-wrap").hide();#}
+            {#}#}
+        {#});#}
+    {#</script>#}
+{#{% endblock %}#}
