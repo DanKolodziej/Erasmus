@@ -13,11 +13,31 @@ $(document).ready(function() {
         $(this).toggleClass("btn-success btn-danger");
     });
 
+    var selectedCoursesArray = [];
     $("td :checkbox").on("click", function() {
         var ectsSum = parseInt($("#ects").text());
         var ects = parseInt($(this).closest("tr").find('td:eq(4)').text());
-        if($(this).prop( "checked")) ectsSum += ects;
-        else ectsSum -= ects;
+        // selectedCoursesArray.push($(this).closest("tr").find('td:eq(1)').text());
+        // console.log(selectedCoursesArray);
+        // var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
+        console.log(x);
+        if($(this).prop( "checked")) {
+            selectedCoursesArray.push($(this).closest("tr").find('td:eq(1)').text());
+            console.log(selectedCoursesArray);
+            var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
+            if (x === 1) {
+                ectsSum += ects;
+            }
+        }
+        else {
+            var uncheckedCourseIndex = selectedCoursesArray.indexOf($(this).closest("tr").find('td:eq(1)').text());
+            selectedCoursesArray.splice(uncheckedCourseIndex, 1);
+            console.log(selectedCoursesArray);
+            var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
+            if (x === 0) {
+                ectsSum -= ects;
+            }
+        }
         $("#ects").text(ectsSum + " ECTS");
         $(this).closest('tr').toggleClass('bg-info');
     });

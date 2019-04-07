@@ -199,6 +199,36 @@
 
         });
 
+        $(document).ready(function() {
+            var data = {
+                university_id: $("#student_university_university").val()
+            };
+
+            var universityId = $("#student_university_university").val();
+            var url = "{{ url('externalCoordinatorsByUniversity', {'id': 'universityId'}) }}";
+            var id = universityId;
+            url = url.replace("universityId", id);
+
+            $.ajax(
+                {
+                    type: 'get',
+                    url: url,
+                    data: data,
+                    success: function(externalCoordinators) {
+
+                        var externalCoordinatorsOptions = $('#student_university_externalCoordinator');
+
+                        externalCoordinatorsOptions.html('');
+                        if(externalCoordinators.length > 0){
+
+                            for (var i=0; i < externalCoordinators.length; i++) {
+                                externalCoordinatorsOptions.append('<option value="' + externalCoordinators[i].externalCoordinatorId + '">' + externalCoordinators[i].name + ' ' + externalCoordinators[i].surname + '</option>');
+                            }
+                        }
+                    }
+                });
+        });
+
         $("#student_university_university").change(function(){
 
             var data = {
