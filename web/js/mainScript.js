@@ -17,13 +17,9 @@ $(document).ready(function() {
     $("td :checkbox").on("click", function() {
         var ectsSum = parseInt($("#ects").text());
         var ects = parseInt($(this).closest("tr").find('td:eq(4)').text());
-        // selectedCoursesArray.push($(this).closest("tr").find('td:eq(1)').text());
-        // console.log(selectedCoursesArray);
-        // var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
-        console.log(x);
+
         if($(this).prop( "checked")) {
             selectedCoursesArray.push($(this).closest("tr").find('td:eq(1)').text());
-            console.log(selectedCoursesArray);
             var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
             if (x === 1) {
                 ectsSum += ects;
@@ -32,7 +28,6 @@ $(document).ready(function() {
         else {
             var uncheckedCourseIndex = selectedCoursesArray.indexOf($(this).closest("tr").find('td:eq(1)').text());
             selectedCoursesArray.splice(uncheckedCourseIndex, 1);
-            console.log(selectedCoursesArray);
             var x = selectedCoursesArray.reduce((n, x) => n + (x === $(this).closest("tr").find('td:eq(1)').text()), 0);
             if (x === 0) {
                 ectsSum -= ects;
